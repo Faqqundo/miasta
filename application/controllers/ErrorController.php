@@ -1,35 +1,60 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *  Moduł ogólny
+ *
+ *
  */
 
 include_once 'BaseController.php';
 
+use Model\ShowableException;
+
 /**
- * Description of IndexController
+ * Kontroler obsługi błędóœ
  *
- * @author mario
+ * PHP version 7.0
+ *
+ *
+ * @category  PHP
+ * @package   Default
+ * @author    Mariusz Wintoch <biuro@informatio.pl>
+ * @copyright 2016 (c) Informatio, Mariusz Wintoch
  */
-class ErrorController extends BaseController {
-    
-    public function indexAction() {
+class ErrorController extends BaseController
+{
+    /**
+     * Tutaj nie powinno się wchodzić
+     *
+     */
+    public function indexAction()
+    {
         //todo!
     }
 
-    public function errorAction() {
-        $this->getResponse()->setHttpResponseCode(500);
+    /**
+     * Tutaj następuje przekierowanie w razie wystąpienia błędu w aplikacji
+     *
+     */
+    public function errorAction()
+    {
+        $responseCode = 500;
+        $this->odp->info = 'Wystąpił błąd aplikacji, żądanie nie zostało obsłużone poprawnie.';
         //todo zapisz bład do bazy
         
-        if (APPLICATION_ENV === 'production') {
-            $this->odp->info = 'Wystąpił błąd aplikacji, żądanie nie zostało obsłużone poprawnie.';            
-        } elseif($this->hasParam('error_handler') && $this->getParam('error_handler')->exception) {
-            $this->odp->info = $this->getParam('error_handler')->exception->getMessage();
-        } else {
-            $this->odp->info = 'Wystąpił błąd aplikacji, żądanie nie zostało obsłużone poprawnie.';
+        if($this->hasParam('error_handler') && $this->getParam('error_handler')->exception) {
+            $exception = $this->getParam('error_handler')->exception;
+            
+            if (APPLICATION_ENV !== 'production' || $exception instanceof ShowableException) {
+                $this->odp->info = $exception->getMessage();
+
+                if (isset($exception->responseCode)) {
+                    $responseCode = $exception->responseCode;
+                }
+            }
         }
+
+        $this->getResponse()->setHttpResponseCode($responseCode);
     }
 
 }

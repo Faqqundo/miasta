@@ -1,5 +1,11 @@
 <?php
 
+/**
+ *  Punkt startowy aplikacji
+ *
+ *
+ */
+
 //katalog nadrzędny, zawierający aplikację oraz wszystko wokół
 defined('ROOT_PATH')
     || define('ROOT_PATH', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR));

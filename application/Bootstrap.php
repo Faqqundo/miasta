@@ -1,8 +1,21 @@
 <?php
 
 /**
+ *  Moduł ogólny
+ *
+ *
+ */
+
+/**
  * Starter aplikacji
- * 
+ *
+ * PHP version 7.0
+ *
+ *
+ * @category  PHP
+ * @package   Default
+ * @author    Mariusz Wintoch <biuro@informatio.pl>
+ * @copyright 2016 (c) Informatio, Mariusz Wintoch
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
@@ -21,7 +34,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     /**
      * Inicjalizacja i konfiguracja autoloaderów w nowych namespacach
      *
-     * @return Zend_Loader_Autoloader 
+     * @return Zend_Loader_Autoloader
      */
     protected function _initAutoloader() {
         //die("autoloader");                
@@ -31,11 +44,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Loader_AutoloaderFactory::factory(array(
             'Zend_Loader_StandardAutoloader' => array(
                 'namespaces' => array(
-                    'Model' => APPLICATION_PATH . DIRECTORY_SEPARATOR . 'models'                    
+                    'Model' => APPLICATION_PATH . DIRECTORY_SEPARATOR . 'models'
                 ))            
         ));
         
-        $autoloader = Zend_Loader_Autoloader::getInstance();                
+        $autoloader = Zend_Loader_Autoloader::getInstance();
         $autoloader->unregisterNamespace('ZendX_');        
        
         return $autoloader;
@@ -44,7 +57,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     /**
      * Inicjalizacja mapera adresów na kontrolery
      *
-     * @return Zend_Controller_Router_Interface 
+     * @return Zend_Controller_Router_Interface
      */
     protected function _initRouter() {
         $this->bootstrap('FrontController');

@@ -1,15 +1,21 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *  Moduł ogólny
+ *
+ *
  */
 
 /**
- * Description of BaseController
+ * Kontroler bazowy do dziedziczenia
  *
- * @author mario
+ * PHP version 7.0
+ *
+ *
+ * @category  PHP
+ * @package   Default
+ * @author    Mariusz Wintoch <biuro@informatio.pl>
+ * @copyright 2016 (c) Informatio, Mariusz Wintoch
  */
 abstract class BaseController extends Zend_Rest_Controller {
 
@@ -48,6 +54,7 @@ abstract class BaseController extends Zend_Rest_Controller {
     //zaślepki, aby niepotrzebnie nie powielać w każdym kontrolerze
 
     public function deleteAction() {
+        //todo można zwracać 501
         throw new Zend_Rest_Server_Exception('Próba wykonania nieznanej operacji');
     }
 

@@ -1,21 +1,32 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *  Moduł ogólny
+ *
+ *
  */
 
 include_once 'BaseController.php';
 
 /**
- * Description of IndexController
+ * Kontroler domyślny
  *
- * @author mario
+ * PHP version 7.0
+ *
+ *
+ * @category  PHP
+ * @package   Default
+ * @author    Mariusz Wintoch <biuro@informatio.pl>
+ * @copyright 2016 (c) Informatio, Mariusz Wintoch
  */
-class IndexController extends BaseController {
- 
-    public function indexAction() {
+class IndexController extends BaseController
+{
+    /**
+     * Informacje o aplikacji
+     * 
+     */
+    public function indexAction()
+    {
         $this->odp->nazwaAplikacji = 'miasta';
         $this->odp->czasSerwera = date(DATE_RFC3339);        
     }
